@@ -120,6 +120,7 @@ background-color: #CFF4D2;
         background-color: #fff;
         margin: 20px;
         position: relative;
+        width: 95%;
     }
     .tiles {
         font-size: 20px;
@@ -135,7 +136,7 @@ background-color: #CFF4D2;
         <a href="{{ url('schedules') }}">View Schedule</a>
         <a href="{{ url('automated') }}">Automated Irrigations</a>
 </div>
-    <div class="container" style="width: 1500px;"style="position: relative;">
+    <div class="container" style="position: relative;">
     <div class="row justify-content-center mt-5">
         <div class = "col-md-12">
         <div class="card">
@@ -150,7 +151,6 @@ background-color: #CFF4D2;
                             <th scope="col">Date</th>
                             <th scope="col">Start</th>
                             <th scope="col">Duration</th>
-                            <th scope="col">Moisture at irrigating</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -161,7 +161,6 @@ background-color: #CFF4D2;
                             <td>{{ $item['date'] }}</td>
                             <td>{{ $item['start'] }}</td>
                             <td>{{ $item['minutes'] }}</td>
-                            <td>{{ $item['moisturemin'] }}</td>
                         </tr>
                         @empty
                         <tr>

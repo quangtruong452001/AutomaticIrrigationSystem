@@ -12,7 +12,6 @@ class IOController extends Controller
     public function __construct(Database $database)
     {
         $this->database = $database;
-        $this->tablename = 'schedule';
     }
     /**
      * Display a listing of the resource.
@@ -40,11 +39,38 @@ class IOController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function storePumpOn()
     {
         //
-        $request= 1;
+        $Signal = 3;
+        $schedule = $this->database->getReference('pump')->push($Signal);
+        return redirect('/');
         
+    }
+
+    public function storePumpOff()
+    {
+        //
+        $Signal = 4;
+        $schedule = $this->database->getReference('pump')->push($Signal);
+        return redirect('/');
+        
+    }
+
+    public function storeLedOn()
+    {
+        //
+        $Signal = 1;
+        $schedule = $this->database->getReference('led')->push($Signal);
+        return redirect('/');
+    }
+
+    public function storeLedOff()
+    {
+        //
+        $Signal = 0;
+        $schedule = $this->database->getReference('led')->push($Signal);
+        return redirect('/');
     }
 
     /**

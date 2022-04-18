@@ -120,6 +120,7 @@ background-color: #CFF4D2;
         background-color: #fff;
         margin: 20px;
         position: relative;
+        width: 100%;
     }
     .tiles {
         font-size: 20px;
@@ -135,7 +136,7 @@ background-color: #CFF4D2;
         <a href="{{ url('schedules') }}">View Schedule</a>
         <a href="{{ url('automated') }}">Automated Irrigations</a>
 </div>
-<div class="container" style="width: 1500px;"style="position: relative;">
+<div class="container" style="position: relative;">
 <a href="{{ url('schedules/create') }}" class="button1" style="right: 40px; top: 0;font-weight: bold;text-align:center;font-size:20px;">New</a>
     <div class="row justify-content-center mt-5">
         <div class = "col-md-12">
@@ -151,7 +152,6 @@ background-color: #CFF4D2;
                             <th scope="col">Date</th>
                             <th scope="col">Start</th>
                             <th scope="col">Duration</th>
-                            <th scope="col">MinMoisture</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -162,7 +162,6 @@ background-color: #CFF4D2;
                             <td>{{ $item['date'] }}</td>
                             <td>{{ $item['start'] }}</td>
                             <td>{{ $item['minutes'] }}</td>
-                            <td>{{ $item['moisturemin'] }}</td>
                             <td><a href="{{ url('schedules/edit/'.$key) }}" class="btn btn-sm btn-success">Edit</a></td>
                             <td><a href="{{ url('schedules/delete/'.$key) }}" class="btn btn-sm btn-danger">Delete</a></td>
                         </tr>

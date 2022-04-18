@@ -1,21 +1,12 @@
 <?php
  
-$dataPoints = array(
-	array("y" => 9, "label" => "12hrs ago"),
-  array("y" => 25, "label" => "11hrs ago"),
-  array("y" => 59, "label" => "10hrs ago"),
-  array("y" => 48, "label" => "9hrs ago"),
-  array("y" => 5, "label" => "8hrs ago"),
-  array("y" => 8, "label" => "7hrs ago"),
-  array("y" => 100, "label" => "6hrs ago"),
-  array("y" => 69, "label" => "5hrs ago"),
-  array("y" => 22, "label" => "4hrs ago"),
-  array("y" => 64, "label" => "3hrs ago"),
-  array("y" => 15, "label" => "2hrs ago"),
-  array("y" => 52, "label" => "1hr ago"),
-  array("y" => 76, "label" => "Now")
-);
- 
+$i = 0;
+$dataPoints = array();
+ foreach($irrigations as $items)
+ {
+   array_push($dataPoints, array("y" => $items['moisturemin'], "label" => $i),);
+   $i++;
+  }
 ?>
 
 @extends('layouts.app')
@@ -130,14 +121,15 @@ chart.render();
     }
 
     #chart {
-  display: inline-block;
+  display: block;
   border-radius: 65px;
   border: 2px solid #fff;
   padding: 20px;
-  width: 912px;
-  height: 800px;
+  width: 95%;
+  height: 600px;
   background-color: #fff;
   margin: 20px;
+  position: relative;
 }    
 #moist {
   display: inline-block;
@@ -150,19 +142,6 @@ chart.render();
   margin: 20px;
   position: relative;
 }    
-
-#report {
-  display: inline-block;
-  border-radius: 58px;
-  border: 2px solid #fff;
-  padding: 20px;
-  width: 1324px;
-  height: 180px;
-  background-color: #fff;
-  margin: 20px;
-  position: relative;
-}
-
 
 .button1 {
     display: block;
@@ -187,6 +166,19 @@ chart.render();
     position: absolute;
     text-align: center;
     pointer-events: none;
+}
+
+.button3 {
+    display: block;
+    border-radius: 58px;
+    border: 2px solid #329d9c;
+    width: 270px;
+    height: 59px;
+    background-color: #ff0000;
+    color: #fff;
+    margin: 20px;
+    position: absolute;
+    text-align: center;
 }
 
 /** Toggle Switch Styling */
@@ -233,21 +225,25 @@ chart.render();
         <a href="{{ url('automated') }}">Automated Irrigations</a>
     </div>
     <div id="chart" style="font-weight: bold;font-size:30px;">
-    <p style="font-weight: bold;text-align:center;font-size:30px;">Chart Placeholder</p>
-    <div id="chartContainer" style="position: absolute ;height: 600px; width: 862px;"></div>
+    <p style="font-weight: bold;text-align:center;font-size:30px;">Moisture</p>
+    <div id="chartContainer" style="position: absolute ;height: 400px; width: 90%;"></div>
 <script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        @php $currMoist = end($irrigations);@endphp
+        <div style="font-weight: bold;text-align:left;font-size:30px; position: aboslute; top: 40px;">{{ $currMoist['moisturemin'] }}</div>
+        @if($pumpSignal == 3)
+        <a href="{{ url('control/pumpOff') }}" class="button3" style="bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Irrigate<a>
+        @else
+        <a href="{{ url('control/pumpOn') }}" class="button1" style="bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Irrigate</a>
+        @endif
 </div>
-    <div id="moist">
-        <p style="font-weight: bold;text-align:left;font-size:30px;">Moisture</p>
-        <button class="button1" style="bottom: 0;font-weight: bold;text-align:center;font-size:30px;" onclick="alert('Not Yet Available')">Irrigate Now</button>
-        <div style="position:absolute; bottom: 100px; left: 50px;font-weight: bold;text-align:center;font-size:30px;">Auto Lighting
-        <label class="switch-wrap">
-        <input type="checkbox" />
-        <div class="switch"></div>
-        <div style="position:absolute; bottom: 60px; left: 5px;font-weight: bold;text-align:center;font-size:30px;">Auto Irrigate
-        <label class="switch-wrap">
-        <input type="checkbox" />
-        <div class="switch"></div>
+    <div id="chart" style="font-weight: bold;text-align:left;font-size:30px;">
+    <p style="font-weight: bold;text-align:center;font-size:30px;">Lighting</p>
+    
+        @if($ledSignal == 1)
+        <a href="{{ url('control/ledOff') }}" class="button3" style="bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Light</a>
+        @else
+        <a href="{{ url('control/ledOn') }}" class="button1" style="bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Light</a>
+        @endif
     </div>
         </label>
 </div>

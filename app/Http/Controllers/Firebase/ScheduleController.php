@@ -16,7 +16,13 @@ class ScheduleController extends Controller
 
     public function home()
     {
-        return view("home");
+        $schedules = $this->database->getReference($this->tablename)->getValue();
+        $irrigations = $this->database->getReference('irrigations')->getValue();
+        $pump = $this->database->getReference('pump')->getValue();
+        $led = $this->database->getReference('led')->getValue();
+        $pumpSignal = end($pump);
+        $ledSignal = end($led);
+        return view('welcome', compact('irrigations', 'pumpSignal', 'ledSignal'));
     }
 
     /**
