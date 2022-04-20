@@ -1,12 +1,13 @@
 <?php
  
 $i = 0;
-$dataPoints = array();
+$allDataPoints = array();
  foreach($irrigations as $items)
  {
-   array_push($dataPoints, array("y" => $items['moisturemin'], "label" => $i),);
+   array_push($allDataPoints, array("y" => $items['moisturemin'], "label" => $i),);
    $i++;
   }
+$dataPoints = array_slice($allDataPoints,-120);
 ?>
 
 @extends('layouts.app')
@@ -128,7 +129,8 @@ chart.render();
   width: 95%;
   height: 600px;
   background-color: #fff;
-  margin: 20px;
+  margin: auto;
+  margin-top: 20px;
   position: relative;
 }    
 #moist {
@@ -226,8 +228,8 @@ chart.render();
     </div>
     <div id="chart" style="font-weight: bold;font-size:30px;">
     <p style="font-weight: bold;text-align:center;font-size:30px;">Moisture</p>
-    <div id="chartContainer" style="position: absolute ;height: 400px; width: 90%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+    <div id="chartContainer" style="position: absolute ;height: 400px; width: 95%; text-align: center;"></div>
+<script style="margin: 10px;" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
         @php $currMoist = end($irrigations);@endphp
         <div style="font-weight: bold;text-align:left;font-size:30px; position: aboslute; top: 40px;">{{ $currMoist['moisturemin'] }}</div>
         @if($pumpSignal == 3)

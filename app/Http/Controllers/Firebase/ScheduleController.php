@@ -18,11 +18,12 @@ class ScheduleController extends Controller
     {
         $schedules = $this->database->getReference($this->tablename)->getValue();
         $irrigations = $this->database->getReference('irrigations')->getValue();
+        $lightlevels = $this->database->getReference('light')->getValue();
         $pump = $this->database->getReference('pump')->getValue();
         $led = $this->database->getReference('light_sensor')->getValue();
         $pumpSignal = end($pump);
         $ledSignal = end($led);
-        return view('welcome', compact('irrigations', 'pumpSignal', 'ledSignal'));
+        return view('welcome', compact('irrigations', 'pumpSignal', 'ledSignal', 'lightlevels'));
     }
 
     /**

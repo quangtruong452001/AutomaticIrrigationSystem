@@ -118,7 +118,8 @@ background-color: #CFF4D2;
         border: 2px solid #fff;
         padding: 20px;
         background-color: #fff;
-        margin: 20px;
+        margin: auto;
+        margin-top: 20px;
         position: relative;
         width: 100%;
     }
