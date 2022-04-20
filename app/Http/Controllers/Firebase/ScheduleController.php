@@ -19,7 +19,7 @@ class ScheduleController extends Controller
         $schedules = $this->database->getReference($this->tablename)->getValue();
         $irrigations = $this->database->getReference('irrigations')->getValue();
         $pump = $this->database->getReference('pump')->getValue();
-        $led = $this->database->getReference('led')->getValue();
+        $led = $this->database->getReference('light_sensor')->getValue();
         $pumpSignal = end($pump);
         $ledSignal = end($led);
         return view('welcome', compact('irrigations', 'pumpSignal', 'ledSignal'));

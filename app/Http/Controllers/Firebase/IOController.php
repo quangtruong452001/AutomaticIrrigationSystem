@@ -61,7 +61,7 @@ class IOController extends Controller
     {
         //
         $Signal = 1;
-        $schedule = $this->database->getReference('led')->push($Signal);
+        $schedule = $this->database->getReference('light_sensor')->push($Signal);
         return redirect('/');
     }
 
@@ -69,7 +69,7 @@ class IOController extends Controller
     {
         //
         $Signal = 0;
-        $schedule = $this->database->getReference('led')->push($Signal);
+        $schedule = $this->database->getReference('light_sensor')->push($Signal);
         return redirect('/');
     }
 

@@ -238,7 +238,10 @@ chart.render();
 </div>
     <div id="chart" style="font-weight: bold;text-align:left;font-size:30px;">
     <p style="font-weight: bold;text-align:center;font-size:30px;">Lighting</p>
-    
+    <div id="chartContainer" style="position: absolute ;height: 400px; width: 90%;"></div>
+<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        @php $currMoist = end($irrigations);@endphp
+        <div style="font-weight: bold;text-align:left;font-size:30px; position: aboslute; top: 40px;">{{ $currMoist['moisturemin'] }}</div>
         @if($ledSignal == 1)
         <a href="{{ url('control/ledOff') }}" class="button3" style="bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Light</a>
         @else
