@@ -150,7 +150,6 @@ background-color: #CFF4D2;
                             <th scope="col">ID</th>
                             <th scope="col">Date</th>
                             <th scope="col">Start</th>
-                            <th scope="col">Duration</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -160,7 +159,6 @@ background-color: #CFF4D2;
                             <td>{{ $i++ }}</td>
                             <td>{{ $item['date'] }}</td>
                             <td>{{ $item['start'] }}</td>
-                            <td>{{ $item['minutes'] }}</td>
                         </tr>
                         @empty
                         <tr>
