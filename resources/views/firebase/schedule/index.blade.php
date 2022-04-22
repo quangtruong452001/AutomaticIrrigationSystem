@@ -134,6 +134,7 @@ background-color: #CFF4D2;
 <div class="content">
 <div class="topnav">
         <a href="{{ url('/') }}">Auto Irrrigation System - AIS</a>
+        <a href="{{ url('lighting') }}">Lighting Information</a>
         <a href="{{ url('schedules') }}">View Schedule</a>
         <a href="{{ url('automated') }}">Automated Irrigations</a>
 </div>

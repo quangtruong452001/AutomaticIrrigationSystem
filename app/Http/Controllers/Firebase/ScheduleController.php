@@ -45,6 +45,18 @@ class ScheduleController extends Controller
         return view("firebase.schedule.showAutomated", compact('irrigations'));
     }
 
+    public function showLighting()
+    {
+        $schedules = $this->database->getReference($this->tablename)->getValue();
+        $irrigations = $this->database->getReference('irrigations')->getValue();
+        $lightlevels = $this->database->getReference('light')->getValue();
+        $pump = $this->database->getReference('pump')->getValue();
+        $led = $this->database->getReference('light_sensor')->getValue();
+        $pumpSignal = end($pump);
+        $ledSignal = end($led);
+        return view("lightcharts", compact('lightlevels', 'pumpSignal', 'ledSignal'));
+    }
+
     /**
      * Show the form for creating a new resource.
      *

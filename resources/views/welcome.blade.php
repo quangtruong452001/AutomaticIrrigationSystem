@@ -223,6 +223,7 @@ chart.render();
 <div class="content">
     <div class="topnav">
         <a href="{{ url('/') }}">Auto Irrrigation System - AIS</a>
+        <a href="{{ url('lighting') }}">Lighting Information</a>
         <a href="{{ url('schedules') }}">View Schedule</a>
         <a href="{{ url('automated') }}">Automated Irrigations</a>
     </div>
@@ -233,23 +234,10 @@ chart.render();
         @php $currMoist = end($irrigations);@endphp
         <div style="font-weight: bold;text-align:left;font-size:30px; position: aboslute; top: 40px;">{{ $currMoist['moisturemin'] }}</div>
         @if($pumpSignal == 3)
-        <a href="{{ url('control/pumpOff') }}" class="button3" style="bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Irrigate<a>
+        <a href="{{ url('control/pumpOff') }}" class="button3" style="text-decoration: none;bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Irrigate<a>
         @else
-        <a href="{{ url('control/pumpOn') }}" class="button1" style="bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Irrigate</a>
+        <a href="{{ url('control/pumpOn') }}" class="button1" style="text-decoration: none;bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Irrigate</a>
         @endif
 </div>
-    <div id="chart" style="font-weight: bold;text-align:left;font-size:30px;">
-    <p style="font-weight: bold;text-align:center;font-size:30px;">Lighting</p>
-    <div id="chartContainer" style="position: absolute ;height: 400px; width: 90%;"></div>
-<script src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
-        @php $currMoist = end($irrigations);@endphp
-        <div style="font-weight: bold;text-align:left;font-size:30px; position: aboslute; top: 40px;">{{ $currMoist['moisturemin'] }}</div>
-        @if($ledSignal == 1)
-        <a href="{{ url('control/ledOff') }}" class="button3" style="bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Light</a>
-        @else
-        <a href="{{ url('control/ledOn') }}" class="button1" style="bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Light</a>
-        @endif
-    </div>
-        </label>
 </div>
 @endsection

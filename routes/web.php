@@ -17,6 +17,7 @@ use Kreait\Firebase\Contract\Database;
 |
 */
 
+Route::get('/', [ScheduleController::class,'home']);
 Route::get('schedules', [ScheduleController::class,'index']);
 Route::get('schedules/create', [ScheduleController::class,'create']);
 Route::post('schedules/create', [ScheduleController::class,'store']);
@@ -25,11 +26,9 @@ Route::put('schedules/update/{id}', [ScheduleController::class,'update']);
 Route::get('schedules/delete/{id}', [ScheduleController::class,'destroy']);
 Route::post('IOControl', [IOController::class,'store']);
 Route::get('automated', [ScheduleController::class,'showAutomated']);
+Route::get('lighting', [ScheduleController::class,'showLighting']);
 
 Route::get('control/pumpOn', [IOController::class,'storePumpOn']);
 Route::get('control/pumpOff', [IOController::class,'storePumpOff']);
 Route::get('control/ledOn', [IOController::class,'storeLedOn']);
 Route::get('control/ledOff', [IOController::class,'storeLedOff']);
-
-
-Route::get('/', [ScheduleController::class,'home']);

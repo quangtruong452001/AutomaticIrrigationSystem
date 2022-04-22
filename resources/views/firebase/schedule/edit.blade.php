@@ -97,6 +97,7 @@ background-image: #CFF4D2;
 </style>
 <div class="topnav">
         <a href="{{ url('/') }}">Auto Irrrigation System - AIS</a>
+        <a href="{{ url('lighting') }}">Lighting Information</a>
         <a href="{{ url('schedules') }}">View Schedule</a>
         <a href="{{ url('automated') }}">Automated Irrigations</a>
 </div>
@@ -120,16 +121,6 @@ background-image: #CFF4D2;
                                 <div class="mb-3">
                                     <label class="form-label" for="start">Start time</label>
                                     <input class="form-control" id="start" name="start" type="time" value="{{$editData['start']}}">
-                                </div>
-                                
-                                <div class="mb-3">
-                                    <label class="form-label" for="minutes">Duration (by minutes)</label>
-                                    <input class="form-control" id="minutes" name="minutes" type="number" min = "0" max ="1440" step="1" value="{{$editData['minutes']}}">
-                                </div>
-
-                                <div class="mb-3">
-                                    <label class="form-label" for="moisturemin">Min Moisture</label>
-                                    <input class="form-control" id="moisturemin" name="moisturemin" type="number" min="0" max="1" step="0.01" value="{{$editData['moisturemin']}}">
                                 </div>
 
                                 <button type="submit" class="btn btn-primary mb-3">Save</button>

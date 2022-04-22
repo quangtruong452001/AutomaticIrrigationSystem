@@ -1,9 +1,40 @@
+<?php
+ 
+$i = 0;
+$allDataPoints = array();
+ foreach($irrigations as $items)
+ {
+   array_push($allDataPoints, array("y" => $items['moisturemin'], "label" => $i),);
+   $i++;
+  }
+$dataPoints = array_slice($allDataPoints,-120);
+?>
+
 @extends('layouts.app')
 
 @section('content')
+
+
+<script>
+window.onload = function () {
+ 
+var chart = new CanvasJS.Chart("chartContainer", {
+	axisY: {
+		title: "Percentage (%)"
+	},
+	data: [{
+		type: "line",
+		dataPoints: <?php echo json_encode($dataPoints, JSON_NUMERIC_CHECK); ?>
+	}]
+});
+chart.render();
+ 
+}
+</script>
+
+
 <!-- Fonts -->
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;600&display=swap" rel="stylesheet">
-
 <!-- Styles -->
 <style>
 .topnav {
@@ -91,14 +122,16 @@
     }
 
     #chart {
-  display: inline-block;
+  display: block;
   border-radius: 65px;
   border: 2px solid #fff;
   padding: 20px;
-  width: 912px;
-  height: 800px;
+  width: 95%;
+  height: 600px;
   background-color: #fff;
-  margin: 20px;
+  margin: auto;
+  margin-top: 20px;
+  position: relative;
 }    
 #moist {
   display: inline-block;
@@ -111,19 +144,6 @@
   margin: 20px;
   position: relative;
 }    
-
-#report {
-  display: inline-block;
-  border-radius: 58px;
-  border: 2px solid #fff;
-  padding: 20px;
-  width: 1324px;
-  height: 180px;
-  background-color: #fff;
-  margin: 20px;
-  position: relative;
-}
-
 
 .button1 {
     display: block;
@@ -148,6 +168,19 @@
     position: absolute;
     text-align: center;
     pointer-events: none;
+}
+
+.button3 {
+    display: block;
+    border-radius: 58px;
+    border: 2px solid #329d9c;
+    width: 270px;
+    height: 59px;
+    background-color: #ff0000;
+    color: #fff;
+    margin: 20px;
+    position: absolute;
+    text-align: center;
 }
 
 /** Toggle Switch Styling */
@@ -189,24 +222,22 @@
 </style>
 <div class="content">
     <div class="topnav">
-        <a>Auto Irrrigation System - AIS</a>
-        <a href="{{ route('schedules')}}">View Schedule</a>
+        <a href="{{ url('/') }}">Auto Irrrigation System - AIS</a>
+        <a href="{{ url('lighting') }}">Lighting Information</a>
+        <a href="{{ url('schedules') }}">View Schedule</a>
+        <a href="{{ url('automated') }}">Automated Irrigations</a>
     </div>
     <div id="chart" style="font-weight: bold;font-size:30px;">
-    <p style="font-weight: bold;text-align:center;font-size:30px;">Chart Placeholder</p>
+    <p style="font-weight: bold;text-align:center;font-size:30px;">Moisture</p>
+    <div id="chartContainer" style="position: absolute ;height: 400px; width: 95%; text-align: center;"></div>
+<script style="margin: 10px;" src="https://canvasjs.com/assets/script/canvasjs.min.js"></script>
+        @php $currMoist = end($irrigations);@endphp
+        <div style="font-weight: bold;text-align:left;font-size:30px; position: aboslute; top: 40px;">{{ $currMoist['moisturemin'] }}</div>
+        @if($pumpSignal == 3)
+        <a href="{{ url('control/pumpOff') }}" class="button3" style="text-decoration: none;bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Irrigate<a>
+        @else
+        <a href="{{ url('control/pumpOn') }}" class="button1" style="text-decoration: none;bottom: 0; right: 0;font-weight: bold;text-align:center;font-size:30px;">Irrigate</a>
+        @endif
 </div>
-    <div id="moist">
-        <p style="font-weight: bold;text-align:left;font-size:30px;">Moisture</p>
-        <button class="button1" style="bottom: 0;font-weight: bold;text-align:center;font-size:30px;" onclick="alert('Not Yet Available')">Irrigate Now</button>
-        <div style="position:absolute; bottom: 100px; left: 50px;font-weight: bold;text-align:center;font-size:30px;">Auto Lighting
-        <label class="switch-wrap">
-        <input type="checkbox" />
-        <div class="switch"></div>
-        <div style="position:absolute; bottom: 60px; left: 5px;font-weight: bold;text-align:center;font-size:30px;">Auto Irrigate
-        <label class="switch-wrap">
-        <input type="checkbox" />
-        <div class="switch"></div>
-    </div>
-        </label>
 </div>
 @endsection
